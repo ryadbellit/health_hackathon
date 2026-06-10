@@ -1,0 +1,63 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<main class="page-shell">
+  <section class="hero-card">
+    <div class="hero-copy">
+      <p class="eyebrow">Health hackathon intake</p>
+      <h1>{{ title }}</h1>
+      <p class="lede">
+        Upload a single image to start a fast, focused intake flow. The page previews the
+        selected file locally and keeps the path clear for the next step.
+      </p>
+
+      <div class="feature-row">
+        <div>
+          <span class="feature-label">Supported</span>
+          <strong>PNG, JPG, GIF, WEBP</strong>
+        </div>
+        <div>
+          <span class="feature-label">Privacy</span>
+          <strong>Local preview only</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-panel">
+      <div class="upload-frame">
+        @if (previewUrl()) {
+          <img class="preview-image" [src]="previewUrl()!" [alt]="fileName()" />
+        } @else {
+          <div class="empty-preview">
+            <div class="empty-icon">⬆</div>
+            <p>Choose an image to preview it here.</p>
+          </div>
+        }
+      </div>
+
+      <div class="upload-details">
+        <label class="upload-button" for="image-upload">Choose image</label>
+        <input
+          id="image-upload"
+          #fileInput
+          class="sr-only"
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+
+        <button class="secondary-button" type="button" [disabled]="!previewUrl()" (click)="clearImage()">
+          Clear selection
+        </button>
+
+        <div class="file-summary">
+          <span class="summary-label">Selected file</span>
+          <strong>{{ fileName() }}</strong>
+          <span>{{ fileMeta() }}</span>
+        </div>
+
+        @if (errorMessage()) {
+          <p class="error-message">{{ errorMessage() }}</p>
+        }
+      </div>
+    </div>
+  </section>
+</main>
