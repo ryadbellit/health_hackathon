@@ -46,6 +46,9 @@
         <button class="secondary-button" type="button" [disabled]="!previewUrl()" (click)="clearImage()">
           Clear selection
         </button>
+        <button class="primary-button" type="button" [disabled]="!previewUrl() || loading()" (click)="upload()">
+          {{ loading() ? 'Uploading…' : 'Upload & Transcribe' }}
+        </button>
 
         <div class="file-summary">
           <span class="summary-label">Selected file</span>
@@ -55,6 +58,13 @@
 
         @if (errorMessage()) {
           <p class="error-message">{{ errorMessage() }}</p>
+        }
+
+        @if (result()) {
+          <div class="result-panel">
+            <h3>Transcription result</h3>
+            <pre>{{ resultJson() }}</pre>
+          </div>
         }
       </div>
     </div>

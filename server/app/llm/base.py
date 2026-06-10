@@ -8,8 +8,8 @@ from typing import Protocol
 
 from pydantic import ValidationError
 
-from app.logging_config import log_event
-from app.schema import MedicationEntry
+from server.app.logging_config import log_event
+from server.app.schema import MedicationEntry
 
 logger = logging.getLogger(__name__)
 

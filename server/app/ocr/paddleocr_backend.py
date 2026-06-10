@@ -8,8 +8,8 @@ attempting to download anything at runtime.
 
 from __future__ import annotations
 
-from app.config import Settings
-from app.ocr.base import OCRResult
+from server.app.config import Settings
+from server.app.ocr.base import OCRResult
 
 
 class PaddleOCRBackend:

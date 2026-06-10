@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
-from app.config import Settings
-from app.llm.base import LLMClient
+from server.app.config import Settings
+from server.app.llm.base import LLMClient
 
 
 def get_llm_client(settings: Settings) -> LLMClient:
     if settings.LLM_BACKEND == "ollama":
-        from app.llm.ollama_client import OllamaVisionClient
+        from server.app.llm.ollama_client import OllamaVisionClient
 
         return OllamaVisionClient(settings)
 
     if settings.LLM_BACKEND == "gemini":
-        from app.llm.gemini_client import GeminiVisionClient
+        from server.app.llm.gemini_client import GeminiVisionClient
 
         return GeminiVisionClient(settings)
 

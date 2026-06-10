@@ -17,7 +17,9 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     # --- Offline / network ---
-    OFFLINE_MODE: bool = True
+    # Default to allowing network access so the Gemini backend can be used
+    # (set OFFLINE_MODE=true in your .env to force local-only mode).
+    OFFLINE_MODE: bool = False
     # NoDecode: take the raw env string as-is (e.g. "127.0.0.1,localhost") instead
     # of pydantic-settings' default JSON decoding for list fields, so the
     # comma-separated form in .env.example works.
@@ -28,7 +30,8 @@ class Settings(BaseSettings):
     # OFFLINE_MODE=true. "gemini" calls the Google Gemini API and requires
     # OFFLINE_MODE=false - intended for demos only, not for real patient data
     # on the intranet. See docs/wiki/Offline-Mode.md.
-    LLM_BACKEND: Literal["ollama", "gemini"] = "ollama"
+    # Default to Gemini for demo purposes. Ensure GEMINI_API_KEY is set.
+    LLM_BACKEND: Literal["ollama", "gemini"] = "gemini"
     OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"
     OLLAMA_MODEL: str = "llava"
 

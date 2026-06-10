@@ -1,7 +1,7 @@
-from app.config import Settings
-from app.llm.factory import get_llm_client
-from app.llm.gemini_client import GeminiVisionClient
-from app.llm.ollama_client import OllamaVisionClient
+from server.app.config import Settings
+from server.app.llm.factory import get_llm_client
+from server.app.llm.gemini_client import GeminiVisionClient
+from server.app.llm.ollama_client import OllamaVisionClient
 
 
 def test_factory_returns_ollama_client_by_default():

@@ -1,9 +1,9 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.llm.ollama_client import OllamaVisionClient
-from app.main import app
-from app.schema import MedicationEntry
+from server.app.llm.ollama_client import OllamaVisionClient
+from server.app.main import app
+from server.app.schema import MedicationEntry
 
 SAMPLE_ENTRY = MedicationEntry(
     trade_name="Novalgin",

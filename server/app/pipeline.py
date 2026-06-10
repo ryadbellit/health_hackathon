@@ -14,10 +14,10 @@ import time
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-from app.config import Settings
-from app.llm.base import LLMClient
-from app.logging_config import log_event
-from app.schema import MedicationEntry
+from server.app.config import Settings
+from server.app.llm.base import LLMClient
+from server.app.logging_config import log_event
+from server.app.schema import MedicationEntry
 
 logger = logging.getLogger(__name__)
 

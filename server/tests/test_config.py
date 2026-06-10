@@ -1,6 +1,6 @@
 import pytest
 
-from app.config import Settings
+from server.app.config import Settings
 
 
 def test_offline_mode_defaults_true():

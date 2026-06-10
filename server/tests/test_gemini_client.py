@@ -3,8 +3,8 @@ import json
 import httpx
 import pytest
 
-from app.config import Settings
-from app.llm.gemini_client import GeminiVisionClient
+from server.app.config import Settings
+from server.app.llm.gemini_client import GeminiVisionClient
 
 
 @pytest.fixture

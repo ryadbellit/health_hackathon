@@ -11,8 +11,8 @@ import os
 
 from PIL import Image
 
-from app.config import Settings
-from app.ocr.base import OCRResult
+from server.app.config import Settings
+from server.app.ocr.base import OCRResult
 
 
 class TesseractBackend:

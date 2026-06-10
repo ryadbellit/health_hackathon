@@ -1,4 +1,4 @@
-from app.schema import MedicationEntry, medications_to_csv
+from server.app.schema import MedicationEntry, medications_to_csv
 
 
 def test_medications_to_csv_matches_fixed_format():

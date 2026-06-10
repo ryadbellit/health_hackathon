@@ -2,8 +2,8 @@ import socket
 
 import pytest
 
-from app.config import Settings
-from app.network_guard import (
+from server.app.config import Settings
+from server.app.network_guard import (
     OfflineModeBlockedError,
     install_network_guard,
     is_host_allowed,

@@ -12,9 +12,9 @@ import base64
 
 import httpx
 
-from app.config import Settings
-from app.llm.base import MEDICATION_EXTRACTION_PROMPT, parse_medication_entries
-from app.schema import MedicationEntry
+from server.app.config import Settings
+from server.app.llm.base import MEDICATION_EXTRACTION_PROMPT, parse_medication_entries
+from server.app.schema import MedicationEntry
 
 
 class GeminiVisionClient:

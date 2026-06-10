@@ -18,7 +18,7 @@ import ipaddress
 import os
 import socket
 
-from app.config import Settings
+from server.app.config import Settings
 
 _original_connect = socket.socket.connect
 _guard_installed = False

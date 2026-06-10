@@ -2,9 +2,9 @@ import os
 
 import pytest
 
-from app.config import Settings
-from app.pipeline import process_upload
-from app.schema import MedicationEntry
+from server.app.config import Settings
+from server.app.pipeline import process_upload
+from server.app.schema import MedicationEntry
 
 SAMPLE_ENTRY = MedicationEntry(
     trade_name="Novalgin",

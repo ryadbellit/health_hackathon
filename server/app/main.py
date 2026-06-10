@@ -8,13 +8,14 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query, UploadFile
 from fastapi.responses import JSONResponse, PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.config import Settings, get_settings
-from app.llm.factory import get_llm_client
-from app.logging_config import configure_logging, log_event
-from app.network_guard import install_network_guard
-from app.pipeline import process_upload
-from app.schema import medications_to_csv
+from server.app.config import Settings, get_settings
+from server.app.llm.factory import get_llm_client
+from server.app.logging_config import configure_logging, log_event
+from server.app.network_guard import install_network_guard
+from server.app.pipeline import process_upload
+from server.app.schema import medications_to_csv
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,18 @@ async def lifespan(app: FastAPI):
     _check_local_model_paths(settings)
 
     app.state.settings = settings
+    # Enable CORS for local frontend dev origin(s)
+    origins = [
+        "http://localhost:4200",
+        "http://127.0.0.1:4200",
+    ]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     app.state.llm_client = get_llm_client(settings)
     log_event(
         logger, "app_startup", offline_mode=settings.OFFLINE_MODE, llm_backend=settings.LLM_BACKEND

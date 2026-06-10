@@ -3,7 +3,7 @@ import io
 import pytest
 from PIL import Image
 
-from app.config import Settings
+from server.app.config import Settings
 
 
 @pytest.fixture
