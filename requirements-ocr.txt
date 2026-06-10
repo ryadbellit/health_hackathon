@@ -1,0 +1,9 @@
+# Optional OCR backends. Install only if OCR_ENGINE is wired in (see docs/wiki/OCR-Setup.md).
+# These are heavy dependencies and not required for the default LLM-based pipeline.
+
+# PaddleOCR (requires det/rec/cls models pre-downloaded to local OCR_MODEL_DIR)
+paddlepaddle>=2.6
+paddleocr>=2.7
+
+# Tesseract bindings (requires the tesseract binary + tessdata installed locally)
+pytesseract>=0.3.10
