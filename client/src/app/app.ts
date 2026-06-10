@@ -15,7 +15,7 @@ export class App implements OnDestroy {
   protected readonly result = signal<any | null>(null);
   protected readonly resultJson = computed(() => {
     const r = this.result();
-    return r ? JSON.stringify(r, null, 2) : null;
+    return r ? JSON.stringify(r.text, null, 2) : null;
   });
 
   protected readonly fileName = computed(() => this.selectedImage()?.name ?? 'No image selected yet');

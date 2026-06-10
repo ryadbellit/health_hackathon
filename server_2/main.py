@@ -6,6 +6,7 @@ import base64
 import os
 from pathlib import Path
 
+import json
 import httpx
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,7 +21,6 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.openai.com")
 CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:4200").split(",")
 
-
 app = FastAPI(title="server_2 openai image-to-text")
 
 app.add_middleware(
@@ -31,11 +31,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/health")
 def health():
     return {"status": "ok", "openai_configured": bool(OPENAI_API_KEY)}
-
 
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
@@ -58,7 +56,18 @@ async def upload(file: UploadFile = File(...)):
                 "content": [
                     {
                         "type": "input_text",
-                        "text": "Extract and return the text content contained in this image. Return only the text. Output only english alphabet characters and numbers. Lean more towards medication names",
+                        "text": """
+                        Extract and return the text content contained in this image. Return only the text. Output only english alphabet characters and numbers. 
+                        Lean more towards medication names. Output strictly in the following JSON format:
+                        ActiveIngredient: , 
+                        Dosis: ,
+                        Route: , 
+                        Morning-Midday-Evening-Night: , 
+                        AsNeeded: , 
+                        Comment: ,
+
+                        If information is missing, leave it empty and add a column after. Do not assume an information you are not certain of.
+                        """,
                     },
                     {"type": "input_image", "image_url": data_url},
                 ],
@@ -90,5 +99,6 @@ async def upload(file: UploadFile = File(...)):
                         break
             if raw_text:
                 break
-
-    return JSONResponse({"text": raw_text, "raw": data})
+    cleaned = raw_text.replace("```json", "").replace("```", "").strip()
+    medication = json.loads(cleaned)
+    return JSONResponse({"text": medication})

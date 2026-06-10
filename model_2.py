@@ -56,7 +56,7 @@ def validate_medications(input_json: str, med_ref_csv: str):
     med_ref = load_med_ref(med_ref_csv)
 
     output = []
-
+    #TODO: Lowercase all to compare
     for med in medications:
         active_ingredient = med.get("active ingredient", "")
         dosis = med.get("dosis", "")
@@ -73,16 +73,6 @@ def validate_medications(input_json: str, med_ref_csv: str):
 
         medication_flag = ""
         dosage_flag = ""
-
-        if normalized_ingredient in med_ref:
-            medication_flag = f"**{active_ingredient}**"
-
-            known_strengths = med_ref[normalized_ingredient]
-
-            if normalized_dosis and normalized_dosis not in known_strengths:
-                dosage_flag = (
-                    f'<span style="color:red"><b>{dosis}</b></span>'
-                )
 
         output.append({
             "active ingredient": active_ingredient,
